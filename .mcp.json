@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "piik-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}

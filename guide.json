@@ -1,0 +1,113 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "piik",
+    "nameCn": "Piik",
+    "repoName": "piik-deploy-guide",
+    "oneLiner": "开一个小房间共享屏幕或游戏，朋友用浏览器就能看，媒体默认点对点直连，也能自己架站",
+    "officialRepo": "https://github.com/TNTcraftHIM/Piik",
+    "officialDocs": "https://piik.tv/docs/?lang=en",
+    "stars": "3.9k",
+    "license": "MIT",
+    "highlights": [
+      "观众零安装：发链接，浏览器直接看",
+      "P2P 优先：媒体点对点直连，服务器压力小",
+      "可选 SFU：网络复杂的场景可开启转发兜底",
+      "房间可控：邀请链接、房间码与可选密码",
+      "一起玩：共享键鼠与手柄，可随时收回控制",
+      "一个程序架站：Web 界面与信令打包在一起"
+    ],
+    "mcpSupport": "项目本身不含 MCP；本仓库的 MCP 只提供部署步骤、端口与常见问题。",
+    "webuiUrl": "http://localhost:8787",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-31",
+    "verification": [
+      [
+        "README 与 self-hosting 文档确认端口 8787、Compose 步骤与 STUN 配置",
+        "已核对 2026-10-31"
+      ],
+      [
+        "Release v2.5.0 资产名与大小已核对",
+        "已核对 2026-10-31"
+      ],
+      [
+        "未实测部署与共享画面",
+        "说明 2026-10-31"
+      ],
+      [
+        "MCP 冒烟：initialize / tools/list 返回 get_guide、search_guide、get_project_info",
+        "已验证 2026-10-31"
+      ],
+      [
+        "非目标宿主调用 get_guide 被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-31"
+      ]
+    ],
+    "deploy": {
+      "type": "docker",
+      "steps": [
+        "mkdir -p piik && cd piik",
+        "curl -fsSLo compose.yaml https://raw.githubusercontent.com/TNTcraftHIM/Piik/main/deploy/container/compose.yaml",
+        "curl -fsSLo .env https://raw.githubusercontent.com/TNTcraftHIM/Piik/main/deploy/container/.env.example",
+        "docker compose run --rm piik --check-config",
+        "docker compose up -d",
+        "echo \"已启动：默认端口 8787，按 .env 里的 PORT 与 PUBLIC_BASE_URL 调整对外地址\""
+      ],
+      "stepsPs": [
+        "New-Item -ItemType Directory -Force piik | Out-Null; Set-Location piik",
+        "curl.exe -fsSLo compose.yaml https://raw.githubusercontent.com/TNTcraftHIM/Piik/main/deploy/container/compose.yaml",
+        "curl.exe -fsSLo .env https://raw.githubusercontent.com/TNTcraftHIM/Piik/main/deploy/container/.env.example",
+        "docker compose run --rm piik --check-config",
+        "docker compose up -d",
+        "Write-Host \"已启动：默认端口 8787，按 .env 里的 PORT 与 PUBLIC_BASE_URL 调整对外地址\""
+      ],
+      "source": "https://github.com/TNTcraftHIM/Piik#self-hosting"
+    },
+    "pitfalls": [
+      "docker compose 不可用：升级 Docker Desktop，确认 v2 子命令",
+      "邀请链接打不开：检查 PUBLIC_BASE_URL 是否写成局域网 IP 或域名",
+      "连不上房间：放行 8787 与 STUN 端口，必要时开 SFU",
+      "浏览器提示证书不安全：自签证书属正常，正式使用换正规证书",
+      "画面卡顿：先确认是不是走了 P2P，再看上行带宽",
+      "远程接管没反应：确认主人已在界面上批准",
+      "想换端口：改 .env 的 PORT，防火墙同步放行"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/piik-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/piik-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "Piik",
+    "Piik 部署",
+    "屏幕共享 自建",
+    "私密 共享 房间",
+    "P2P 屏幕共享",
+    "piik 教程",
+    "一起看电影 工具",
+    "共享游戏 画面",
+    "piik deploy guide",
+    "远程接管 屏幕"
+  ],
+  "topics": [
+    "screen-sharing",
+    "webrtc",
+    "self-hosted",
+    "p2p",
+    "docker",
+    "piik"
+  ]
+}
